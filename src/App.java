@@ -9,15 +9,21 @@ public class App {
         function.sort(arr.clone());
         long endTime = System.nanoTime();
         long timeTaken = endTime - startTime;
-
+    
         double milliseconds = (double) timeTaken / 1_000_000.0;
         String formattedTime = String.format("%.7f", milliseconds);
-
+    
+        int trocas;
+        if (function instanceof Lomuto) {
+            trocas = ((Lomuto) function).getTrocas();
+        } else {
+            trocas = ((Hoare) function).getTrocas();
+        }
         System.out.println(partitionMethod + ": " + formattedTime + " milissegundos");
-
+        System.out.println("Quantidade de trocas: " + trocas);
+    
         return timeTaken;
     }
-
 
     // Função para gerar um array de números aleatórios e únicos
     public static int[] generateRandomArray(int size) {
@@ -49,8 +55,8 @@ public class App {
     }
 
     public static void main(String[] args) {
-    int[] randomArray = generateRandomArray(200000);
-    int[] sizes = {100, 500, 1000, 5000, 30000, 80000, 100000, 150000, 200000};
+        int[] randomArray = generateRandomArray(200000);
+        int[] sizes = {100, 500, 1000, 5000, 30000, 80000, 100000, 150000, 200000};
 
         for (int size : sizes) {
             int[] subarray = Arrays.copyOfRange(randomArray, 0, size);

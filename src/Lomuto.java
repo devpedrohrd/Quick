@@ -1,6 +1,9 @@
 public class Lomuto implements App.SortingFunction {
+    private int trocas; // variável para contar o número de trocas
+
     @Override
     public int[] sort(int[] arr) {
+        trocas = 0;
         quickSortLomuto(arr, 0, arr.length - 1);
         return arr;
     }
@@ -25,6 +28,8 @@ public class Lomuto implements App.SortingFunction {
                 int temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
+
+                trocas++;
             }
         }
 
@@ -33,6 +38,12 @@ public class Lomuto implements App.SortingFunction {
         arr[i + 1] = arr[high];
         arr[high] = temp;
 
+        trocas++;
+
         return i + 1;
+    }
+
+    public int getTrocas() {
+        return trocas;
     }
 }

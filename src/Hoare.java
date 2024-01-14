@@ -1,6 +1,9 @@
 public class Hoare implements App.SortingFunction {
+    private int trocas; // variável para contar o número de trocas
+
     @Override
     public int[] sort(int[] arr) {
+        trocas = 0; 
         quickSortHoare(arr, 0, arr.length - 1);
         return arr;
     }
@@ -43,6 +46,12 @@ public class Hoare implements App.SortingFunction {
             int temp = arr[i];
             arr[i] = arr[j];
             arr[j] = temp;
+            
+            trocas++; 
         }
+    }
+
+    public int getTrocas() {
+        return trocas;
     }
 }
